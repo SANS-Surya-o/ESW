@@ -119,7 +119,7 @@ def process_images(input_folder, output_folder, model_path, confidence_threshold
 
 # Specify paths
 input_folder = "input_images"  # Folder containing input images
-output_folder = "output"        # Folder to save output files
+output_folder = "coordinates"        # Folder to save output files
 model_path = "yolov10x.pt"       # Path to your YOLO model
 confidence_treshold = 0.2
 batch_processing = False

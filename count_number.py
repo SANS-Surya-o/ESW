@@ -2,7 +2,8 @@ import json
 import os
 
 
-
+read_from = "coordinates"
+output_to = "number"
 
 
 def inside(box1, box2):
@@ -21,8 +22,8 @@ def count_objects():
         activities = json.load(activity_file)
 
 
-    output_folder = 'output'
-    number_folder = 'number'
+    output_folder = read_from
+    number_folder = output_to
 
     # Create the number folder if it doesn't exist
     os.makedirs(number_folder, exist_ok=True)
