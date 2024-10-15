@@ -3,7 +3,7 @@ import json
 from ultralytics import YOLO
 
 # Global Variables
-input_folder = "input_images"  # Folder containing input images
+input_folder = "../yolov10/testimages/main_2.5x"  # Folder containing input images
 coord_output_folder = "coordinates"  # Folder to save coordinates JSON
 number_output_folder = "number"  # Folder to save counts JSON
 model_path = "yolov10x.pt"  # Path to your YOLO model
