@@ -3,7 +3,7 @@ import os
 
 
 read_from = "coordinates"
-output_to = "number"
+output_to = "site_count"
 
 
 def inside(box1, box2):

@@ -1,5 +1,7 @@
 import os
 
+# this code will reaname all the images in the format imgi.jpg
+
 def rename_images(folder_path):
     # Get a list of all files in the folder
     images = os.listdir(folder_path)
@@ -15,5 +17,5 @@ def rename_images(folder_path):
         print(f"Renamed {image} to {new_name}")
 
 # Specify the folder path containing images
-folder_path = "../yolov10/testimages/main_2.5x"
+folder_path = "../yolov10/testimages/main_2.5x"                   # folder in which u want to rename
 rename_images(folder_path)
