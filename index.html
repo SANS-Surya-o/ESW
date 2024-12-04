@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Latest JSONs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .timestamp-slider {
+            width: 80%;
+        }
+        #selected-timestamp {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+        }
+        .result h3 {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select Number of Latest JSONs</h1>
+        <input type="range" min="1" max="50" value="1" class="timestamp-slider" id="jsonCountSlider">
+        <p id="selected-timestamp">Number of JSONs: 1</p>
+        <button id="fetchDataBtn">Fetch Data</button>
+        
+        <div id="results" class="results">
+            <!-- JSON results will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        const jsonCountSlider = document.getElementById("jsonCountSlider");
+        const selectedTimestamp = document.getElementById("selected-timestamp");
+        const fetchDataBtn = document.getElementById("fetchDataBtn");
+        const resultsDiv = document.getElementById("results");
+
+        jsonCountSlider.addEventListener('input', function() {
+            selectedTimestamp.textContent = `Number of JSONs: ${jsonCountSlider.value}`;
+        });
+
+        fetchDataBtn.addEventListener('click', function() {
+            const jsonCount = jsonCountSlider.value;
+
+            // Make an AJAX request to the Flask server with the selected number of JSONs
+            fetch(`/get_jsons?count=${jsonCount}`)
+                .then(response => response.json())
+                .then(data => {
+                    resultsDiv.innerHTML = ''; // Clear any previous results
+
+                    if (data.length === 0) {
+                        resultsDiv.innerHTML = '<p>No data found.</p>';
+                    } else {
+                        // Loop through the returned JSON objects and display them in a human-readable format
+                        data.forEach(item => {
+                            const resultDiv = document.createElement('div');
+                            resultDiv.classList.add('result');
+                            resultDiv.innerHTML = `<h3>Timestamp: ${item.timestamp}</h3><pre>${JSON.stringify(item.data, null, 2)}</pre>`;
+                            resultsDiv.appendChild(resultDiv);
+                        });
+                    }
+                })
+                .catch(error => {
+                    resultsDiv.innerHTML = '<p>Error fetching data.</p>';
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>
