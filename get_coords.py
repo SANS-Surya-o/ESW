@@ -5,12 +5,12 @@ import time
 from datetime import datetime
 
 # Global Variables
-input_folder = "../yolov10/testimages/main_2.5x"  # Folder containing input images
+input_folder = "../images"  # Folder containing input images
 coord_output_folder = "coordinates"  # Folder to save coordinates JSON
 number_output_folder = "number"  # Folder to save counts JSON
 model_path = "yolov10x.pt"  # Path to your YOLO model
 confidence_treshold = 0.2  # Confidence threshold
-accepted_classes = ['person', 'car', 'truck', 'bus', 'motorbike', 'bicycle']  # List of accepted classes
+accepted_classes = ['person', 'truck'] # List of accepted classes
 
 
 
@@ -99,5 +99,6 @@ def get_coords(img_path):
     
 # Run the image processing
 if __name__ == "__main__":
-    get_coords()
+    for file in os.listdir(input_folder):
+        get_coords(input_folder + "/" + file)
 
